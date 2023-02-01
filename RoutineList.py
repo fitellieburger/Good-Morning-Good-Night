@@ -1,44 +1,67 @@
+"""
+Screen navigation - built with support from chatGPT, Jan xx version
+                                (where xx is the date when each snippet of code was developed)
+
+"""
 
 # Screens and layout
+import os
 from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 
-# Lists
-from kivymd.uix.list import MDList, OneLineListItem, OneLineIconListItem, IconLeftWidget
-from kivy.uix.recycleview import RecycleView
-from kivy.uix.recycleview.views import RecycleDataViewBehavior
+# Labels and Text
 from kivy.uix.label import Label
-from kivy.properties import BooleanProperty
-from kivy.uix.recycleboxlayout import RecycleBoxLayout
-from kivy.uix.recyclelayout import RecycleLayout
-from kivy.uix.behaviors import FocusBehavior
-from kivy.uix.scrollview import ScrollView
+
+# Images
+from kivy.uix.image import Image
 
 # Buttons
-from kivymd.uix.button import MDRectangleFlatButton, MDFlatButton
+from kivy.uix.button import Button
 
 
-class RoutineList(RecycleLayout):
-    def __init__(self, **kwargs):
 
+
+
+class RoutineItem(BoxLayout):
+    def __init__(self, left_image_source, label_text, right_image_source, **kwargs):
         super().__init__(**kwargs)
+        self.orientation = "horizontal"
+        self.spacing = 10
 
-        self.data = []
-        for i in range(5):
-            self.data.append({'text': f'Item {i}', 'image': 'path/to/image'})
+        # Center the layout
 
-        self.viewclass = 'RoutineListItem'
-        self.layout = BoxLayout(orientation='vertical', size_hint=(.8, 0.66), height=.5)
-        self.item_strings = [{'text': d['text'], 'image': d['image']} for d in self.data]
+        self.size_hint_x = .3
 
-class RoutineListItem(BoxLayout):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        #self.image = Image(source=kwargs['data']['image'])
-        self.label = Label(text=kwargs['data']['text'])
-        #self.add_widget(self.image)
+        # Add left image
+        self.left_image = Image(source=left_image_source, size_hint_x=None, width=50, size_hint_y=None, height=50)
+        self.add_widget(self.left_image)
+
+        # Add label
+        self.label = Label(text=label_text, font_name="ItemFont",
+                           size_hint_x=None, size_hint_y=None, width=100, height=50, text_size=(None, None),
+                           halign='center')
         self.add_widget(self.label)
-        #self.add_widget(Button(text='Button'))
+
+        # Add right image
+        self.right_button = Button(background_normal=right_image_source, size_hint_x=None, width=50,
+                                   size_hint_y=None, height=50)
+        self.right_button.bind(on_press=self.update_right_image)
+        self.add_widget(self.right_button)
 
 
+    def update_right_image(self, instance):
+        # Update the source of the right image
+        if self.right_button.background_normal == "images/checkbox.png":
+            self.right_button.background_normal = "images/checked.png"
+
+        else:
+            self.right_button.background_normal = "images/checkbox.png"
+
+    def _update_size(self, instance, value):
+        instance.height = 50
+        instance.width = self.parent.width
+
+    def _update_pos(self, instance, value):
+        instance.x = self.parent.x
+        instance.y = self.parent.y + (self.parent.height - instance.height) / 2
 
