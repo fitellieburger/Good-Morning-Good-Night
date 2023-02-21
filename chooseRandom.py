@@ -16,7 +16,6 @@ Jan 30 Version
 
 """
 
-
 # imports
 import zmq
 import random
@@ -40,15 +39,19 @@ while True:
     else:
         try:
             currentList = int(currentList)
-        except:
+        except ValueError:
             currentList = currentList
 
-    # if currentList is a list
-    if isinstance(currentList, list):
+    # if currentList is a list of more than one
+    if isinstance(currentList, list) and len(currentList) > 1:
         chooseIndex = random.randint(0, 4294967295) % len(currentList)-1
 
         # return value at selected index
         socket.send_string(str(currentList[chooseIndex]))
+
+    # if current list is a list of one
+    elif isinstance(currentList, list) and len(currentList) == 1:
+        socket.send_string(str(currentList[0]))
 
     # if currentList is an int
     elif isinstance(currentList, int):

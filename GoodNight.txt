@@ -1,0 +1,22 @@
+{"Title": "Good Night",
+"Background": "images/GoodNightBkgnd.png",
+"rightButton": "images/blueButtonRight.png",
+"leftButton": "images/blueButtonLeft.png",
+"numberTasks" : 5,
+"task1": {
+"Title": "Go Potty",
+"image": "images/potty.png",
+},
+"task2": {"Title": "Brush Teeth",
+"image": "images/toothbrush_2.png"
+},
+"task3": {"Title": "PJs On",
+"image": "images/pjs.png"
+},
+"task4": {"Title": "Storytime",
+"image": "images/book.png"
+},
+"task5": {"Title": "Off to Bed",
+"image": "images/stars.png"
+}
+}

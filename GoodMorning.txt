@@ -1,0 +1,19 @@
+{"Title": "Good Morning",
+"Background": "images/GoodMorningBkgnd.png",
+"rightButton": "images/yellowButtonRight.png",
+"leftButton" : "images/yellowButtonLeft.png",
+"numberTasks" : 4,
+"task1" : {
+"Title": "Go Potty",
+"image": "images/potty.png",
+},
+"task2" : {"Title": "Put On Clothes",
+"image": "images/clothes.png"
+},
+"task3" : {"Title": "Eat Breakfast",
+"image": "images/breakfast.png"
+},
+"task4" : {"Title": "Brush Teeth",
+"image": "images/toothbrush_2.png"
+}
+}
