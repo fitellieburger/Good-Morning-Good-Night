@@ -13,7 +13,8 @@ import json
 def _getRoutine():
 
     # if before 12, set morning routine
-    if time.localtime().tm_hour < 12:
+    if time.localtime().tm_hour > 12:
+
         with open('GoodMorning.txt') as file:
             routineSet = file.read()
         routineSet = ast.literal_eval(str(routineSet))
@@ -86,7 +87,7 @@ def _setPhrases(allPhrases, numImages):
 
         # if request fails, set default phrase "good"
         if phraseList[j] == "ERROR: Please send a list or an int":
-            phraseList = "good"
+            phraseList[j] = "good"
 
     socket.close()
 
